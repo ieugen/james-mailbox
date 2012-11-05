@@ -17,16 +17,24 @@
   specific language governing permissions and limitations
   under the License.    
 -->
-
 <beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
-          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
     <!-- 
       Mailbox Authenticator
      -->
 
-    <bean id="authenticator" class="org.apache.james.mailbox.spring.AnonymousAuthenticator"/>
+    <!-- 
+    Best practices to run Spring-DM
+    http://static.springsource.org/osgi/docs/1.2.x/reference/html/
+    -->
+    <import resource="classpath:/META-INF/org/apache/james/spring-mailbox-authenticator.xml"/>
+
+    <!-- Register service -->
+    <osgi:service ref="authenticator" auto-export="interfaces" />
 
 </beans>
