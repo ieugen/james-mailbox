@@ -30,6 +30,7 @@
     <artifactId>apache-james-mailbox-store</artifactId>
 
     <name>Apache James Mailbox Store Framework</name>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
@@ -87,4 +88,23 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.5</version>
+                <configuration>
+                  <instructions>
+                      <Import-Package>*</Import-Package>
+                      <Export-Package>org.apache.james.mailbox.store.*</Export-Package>
+                  </instructions>
+                </configuration>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
